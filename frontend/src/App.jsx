@@ -1,5 +1,6 @@
 import { BrowserRouter , Routes , Route } from 'react-router-dom'
-import Layout from './components/appui/Layout'
+import Layout from './components/genrelui/Layout'
+import Tasks from './components/tasksui/Tasks'
 
 
 function App() {
@@ -7,19 +8,11 @@ function App() {
   return (
     <>
     <BrowserRouter>
-    <Routes> 
-
+      <Routes> 
        <Route path='/'  element ={<Layout/>}>
-       
-         
-
-       </Route>
-       
-    </Routes>
-
-
-
-
+        <Route path='tasks'  element={<Tasks/>} />
+      </Route>
+   </Routes>
     </BrowserRouter>
     </>
   )
