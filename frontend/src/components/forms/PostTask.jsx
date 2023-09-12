@@ -1,11 +1,31 @@
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import useTaskMutation from '../../../customhooks/useTaskMutation';
 import './forms.css'
+import { useMutation } from '@tanstack/react-query';
+import axios from 'axios';
+import { toast } from 'react-toastify';
+ 
 
 
 const PostTask = () => {
-  const mutattion = useTaskMutation()
+
+   const { mutate  } = useMutation({
+     mutationFn : async (data) => {
+       await axios.post('/api/v1/task/new' , data)
+     },
+     onSuccess: () => {
+      toast.success("task posted sucessfully")
+     }, 
+     onError : (error) => {
+       toast.error(` status ${error?.request.status}    ${error?.response?.data?.error} `|| "task can not be posted sucessfully")
+       console.log(error?.response?.data?.error);
+
+     }
+
+   })
+
+
+
 
 
   const formik = useFormik({
@@ -22,7 +42,7 @@ const PostTask = () => {
       
     onSubmit:async ( values , {resetForm} )=> {
       console.log(values);
-      mutattion.mutate(values)
+      mutate(values)
       resetForm()
     },
     
