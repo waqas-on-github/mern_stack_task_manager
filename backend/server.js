@@ -6,12 +6,12 @@ import path from 'path'
 import { fileURLToPath } from 'url'
 import createError from 'http-errors'
 import logger from 'morgan'
-
+import CustomError from './utils/CustomError.js'
 
 // import routers
 import { router as indexRouter } from './routes/index.js'
 import { router as usersRouter } from './routes/users.js'
-import { router as todoRouter  } from './routes/todorouter.js'
+import { router as taskRouter  } from './routes/taskrouter.js'
 
 // create the express app
 const app = express()
@@ -25,11 +25,10 @@ app.use(
     path.join(path.dirname(fileURLToPath(import.meta.url)), 'public')
   )
 )
-app.use(MethodOverride('_method'))
 // mount imported routes
-app.use('/', indexRouter)
-app.use('/users', usersRouter)
-app.use('/todos' , todoRouter)
+app.use('/api/v1/', indexRouter)
+app.use('/api/v1/users', usersRouter)
+app.use('/api/v1/task' , taskRouter)
 
 
 
@@ -43,13 +42,13 @@ app.use(function (req, res, next) {
 app.use(function (err, req, res, next) {
   if(err instanceof(CustomError)) {
     // do acc to custom error 
-    res.static(err.code || 500).json({
+    return res.status(err.code || 500).json({
       sucess:  false,
       error : err.message
     })
   }
  if(err) {
-  res.status(err.code || 500).json({
+  return res.status(err.code || 500).json({
     sucess:  false,
     error : err.message
   })

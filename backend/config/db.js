@@ -2,7 +2,7 @@
 mongoose.set('strictQuery' ,false)
 const db = mongoose.connection
 
-mongoose.connect('mongodb+srv://waqasvu892:Txhh4ZDoXI4abHGg@cluster0.4ude9ub.mongodb.net/test' )
+mongoose.connect('mongodb+srv://waqasvu892:Txhh4ZDoXI4abHGg@cluster0.4ude9ub.mongodb.net/Task_manager' )
 
 
 db.on('connected' ,() => {
