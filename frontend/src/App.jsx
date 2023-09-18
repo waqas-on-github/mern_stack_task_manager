@@ -1,6 +1,7 @@
 import { BrowserRouter , Routes , Route } from 'react-router-dom'
 import Layout from './components/genrelui/Layout'
 import Tasks from './components/tasksui/Tasks'
+import PostTask from './components/forms/PostTask'
 
 
 function App() {
@@ -10,6 +11,7 @@ function App() {
     <BrowserRouter>
       <Routes> 
        <Route path='/'  element ={<Layout/>}>
+        <Route index element={<PostTask/>}/>
         <Route path='tasks'  element={<Tasks/>} />
       </Route>
    </Routes>

@@ -3,7 +3,10 @@ import { NavLink } from "react-router-dom"
 const Nav = () => {
   return (
     <> 
-    <NavLink to= '/tasks' > my tasks</NavLink>
+    <NavLink to ="/" > Home</NavLink>
+    <NavLink to= '/tasks' > tasks</NavLink>
+
+
 
     </>
   )
